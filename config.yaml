@@ -1,0 +1,48 @@
+# Google Gas Town - Default Configuration
+
+# Workspace Settings
+workspace: ~/gt
+default_agent: jules
+
+# Agent Pool Settings
+max_concurrent_agents: 4
+poll_interval: 5        # seconds between status checks
+rate_limit_backoff: 30  # seconds to wait on rate limit
+
+# Authentication
+auth:
+  method: adc           # adc | gcloud | token
+  token_path: null      # path to token file (if method: token)
+
+# tmux Settings
+tmux:
+  session_name: gastown
+  config: tmux/gastown.tmux.conf
+  layout: default       # default | swarm
+
+# Beads (Memory) Settings
+beads:
+  enabled: true
+  context_map: true     # Generate context maps for agents
+  max_history: 10       # Recent commits to include
+
+# Convoy Settings
+convoy:
+  default_timeout: 3600   # seconds
+  auto_merge: false       # Auto-merge PRs on completion
+  
+# Hooks Settings
+hooks:
+  cleanup_after: 7        # days to keep archived hooks
+  auto_archive: true      # Archive completed hooks
+
+# Dashboard Settings
+dashboard:
+  refresh_rate: 2         # seconds
+  show_completed: true
+  max_visible: 20
+
+# Logging
+logging:
+  level: INFO             # DEBUG | INFO | WARNING | ERROR
+  file: .gastown/gastown.log

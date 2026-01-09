@@ -1,0 +1,41 @@
+# Convoy Template
+# Define a bundle of related tasks for the swarm
+
+name: "example-convoy"
+description: "Template for defining a convoy of tasks"
+
+# Metadata
+rig: default
+priority: normal  # low, normal, high
+timeout: 3600     # seconds per task
+
+# Tasks to be distributed to polecats
+tasks:
+  - description: "First task description"
+    files:
+      - src/main.py
+      - src/utils.py
+    depends_on: []
+    
+  - description: "Second task that depends on first"
+    files:
+      - tests/test_main.py
+    depends_on:
+      - 0  # Index of first task
+      
+  - description: "Independent task"
+    files: []
+    depends_on: []
+
+# Completion hooks
+on_complete:
+  - action: notify
+    message: "Convoy complete!"
+  - action: merge
+    strategy: sequential  # sequential or parallel
+
+# Example usage:
+# 1. Copy this template: cp templates/convoy_template.yaml convoys/my-convoy.yaml
+# 2. Edit the tasks
+# 3. Create convoy: gt convoy create --from convoys/my-convoy.yaml
+# 4. Launch: gt swarm --convoy <convoy-id>
