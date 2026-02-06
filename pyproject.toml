@@ -1,0 +1,19 @@
+[project]
+name = "budget-agent"
+version = "0.1.0"
+description = "A budget-aware, model-agnostic coding agent that optimizes cost per task"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.39.0",
+    "openai>=1.50.0",
+    "google-genai>=1.0.0",
+    "rich>=13.0.0",
+    "click>=8.0.0",
+]
+
+[project.scripts]
+agent = "agent.cli:main"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
